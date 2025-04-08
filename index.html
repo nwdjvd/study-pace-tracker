@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Pace Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Study Pace Tracker</h1>
+        </header>
+        
+        <main>
+            <!-- Setup form shown when no active task exists -->
+            <section id="setup-section" class="section">
+                <h2>Set Up Your Study Plan</h2>
+                <form id="setup-form">
+                    <div class="form-group">
+                        <label for="task-name">What are you studying?</label>
+                        <input type="text" id="task-name" placeholder="e.g., Gamla tentor, Problem sets" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="total-tasks">Total number of tasks</label>
+                        <input type="number" id="total-tasks" min="1" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="daily-goal">How many tasks do you want to complete per day?</label>
+                        <input type="number" id="daily-goal" min="1" step="1" required>
+                        <small class="form-hint">Enter a whole number. This helps track if you're meeting your daily goals.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="deadline">Deadline</label>
+                        <input type="date" id="deadline" required>
+                    </div>
+                    
+                    <button type="submit" class="btn primary-btn">Start Tracking</button>
+                </form>
+            </section>
+            
+            <!-- Tracking section shown when there's an active study plan -->
+            <section id="tracking-section" class="section hidden">
+                <div class="progress-header">
+                    <h2 id="task-title">Your Progress</h2>
+                    <button id="edit-plan-btn" class="btn secondary-btn">Edit Plan</button>
+                </div>
+                
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-label">Tasks Completed</div>
+                        <div class="stat-value-container">
+                            <div class="stat-value" id="completed-tasks">0/0</div>
+                            <button id="edit-tasks-btn" class="btn icon-btn" title="Edit completed tasks">✏️</button>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-label">Days Left</div>
+                        <div class="stat-value" id="days-left">0</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-label">Daily Pace Needed</div>
+                        <div class="stat-value" id="required-pace">0</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-label">Your Daily Goal</div>
+                        <div class="stat-value" id="daily-goal-display">0</div>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progress-bar"></div>
+                    </div>
+                    <div class="progress-percentage" id="progress-percentage">0%</div>
+                </div>
+                
+                <div class="feedback-container" id="feedback-message">
+                    Start tracking your progress today!
+                </div>
+                
+                <div class="tip-container hidden" id="tip-message"></div>
+                
+                <div class="daily-update">
+                    <h3>Update Today's Progress</h3>
+                    <div class="task-update-form">
+                        <label for="tasks-completed-today">Tasks completed today</label>
+                        <input type="number" id="tasks-completed-today" min="0" value="0">
+                        <button id="log-progress-btn" class="btn primary-btn">Log Progress</button>
+                    </div>
+                </div>
+                
+                <div class="history-container">
+                    <h3>Progress History</h3>
+                    <div id="history-list" class="history-list">
+                        <!-- History items will be added here -->
+                    </div>
+                </div>
+                
+                <div class="actions-container">
+                    <button id="reset-btn" class="btn danger-btn">Reset</button>
+                    <button id="export-btn" class="btn secondary-btn">Export Data</button>
+                    <button id="import-btn" class="btn secondary-btn">Import Data</button>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Study Pace Tracker - Data stored locally in your browser</p>
+            <p class="signature">Made with ❤️ by Nawid</p>
+        </footer>
+    </div>
+    
+    <!-- Modal for editing completed tasks -->
+    <div id="edit-tasks-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Completed Tasks</h3>
+                <button id="close-modal-btn" class="btn icon-btn">×</button>
+            </div>
+            <div class="modal-body">
+                <p>Update your total completed tasks:</p>
+                <div class="form-group">
+                    <input type="number" id="edit-completed-tasks" min="0" value="0">
+                    <small class="form-hint">This will update your total progress without affecting your history.</small>
+                </div>
+                <div class="modal-actions">
+                    <button id="save-tasks-btn" class="btn primary-btn">Save Changes</button>
+                    <button id="cancel-edit-btn" class="btn secondary-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html> 

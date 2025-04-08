@@ -1,0 +1,449 @@
+:root {
+    --primary-color: #4361ee;
+    --primary-light: #e2e8ff;
+    --danger-color: #ef476f;
+    --success-color: #06d6a0;
+    --warning-color: #ffd166;
+    --neutral-color: #ced4da;
+    --dark-color: #212529;
+    --light-color: #f8f9fa;
+    --background-color: #ffffff;
+    --text-color: #333333;
+    --border-radius: 8px;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #f5f7fa;
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.app-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--background-color);
+    box-shadow: var(--shadow);
+    border-radius: var(--border-radius);
+    min-height: 100vh;
+}
+
+header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: var(--dark-color);
+}
+
+h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+}
+
+.section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Form styles */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--neutral-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.form-hint {
+    display: block;
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-top: 0.25rem;
+}
+
+/* Button styles */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.primary-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.primary-btn:hover {
+    background-color: #3a56d4;
+}
+
+.secondary-btn {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    border: 1px solid var(--neutral-color);
+}
+
+.secondary-btn:hover {
+    background-color: #e9ecef;
+}
+
+.danger-btn {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.danger-btn:hover {
+    background-color: #d64162;
+}
+
+/* Progress header */
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Stats container */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark-color);
+}
+
+.stat-value-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.icon-btn {
+    padding: 0.25rem;
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-btn:hover {
+    color: #3a56d4;
+    transform: scale(1.1);
+}
+
+/* Progress bar */
+.progress-container {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.progress-bar-container {
+    flex: 1;
+    height: 16px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: 8px;
+    width: 0%;
+    transition: width 0.5s ease-in-out;
+}
+
+.progress-percentage {
+    margin-left: 1rem;
+    font-weight: 600;
+    min-width: 60px;
+    text-align: right;
+}
+
+/* Feedback styles */
+.feedback-container {
+    padding: 1rem;
+    margin-bottom: 2rem;
+    background-color: var(--primary-light);
+    border-radius: var(--border-radius);
+    font-weight: 500;
+}
+
+/* Tip styles */
+.tip-container {
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    border-left: 4px solid var(--warning-color);
+    background-color: rgba(255, 209, 102, 0.2);
+    color: #5c4500;
+    position: relative;
+}
+
+.tip-container::before {
+    content: '💡';
+    margin-right: 0.5rem;
+}
+
+.tip-skip-day {
+    border-left-color: var(--warning-color);
+    background-color: rgba(255, 209, 102, 0.2);
+}
+
+.tip-reduce-load {
+    border-left-color: #4cc9f0;
+    background-color: rgba(76, 201, 240, 0.2);
+    color: #06769e;
+}
+
+.tip-reduce-load::before {
+    content: '⚡';
+}
+
+.tip-catch-up {
+    border-left-color: #ff9e00;
+    background-color: rgba(255, 158, 0, 0.2);
+    color: #804f00;
+}
+
+.tip-catch-up::before {
+    content: '🔔';
+}
+
+/* Daily update form */
+.daily-update {
+    margin-bottom: 2rem;
+}
+
+.task-update-form {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.task-update-form label {
+    flex: 1;
+}
+
+.task-update-form input {
+    width: 100px;
+}
+
+/* History list */
+.history-container {
+    margin-bottom: 2rem;
+}
+
+.history-list {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid var(--neutral-color);
+    border-radius: var(--border-radius);
+}
+
+.history-item {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--neutral-color);
+    display: flex;
+    justify-content: space-between;
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.history-date {
+    font-weight: 500;
+}
+
+.history-completed {
+    font-weight: 600;
+}
+
+/* Actions container */
+.actions-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+/* Footer */
+footer {
+    margin-top: 3rem;
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+.signature {
+    margin-top: 0.5rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+/* Status colors for feedback */
+.status-on-track {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.status-ahead {
+    background-color: #4cc9f0;
+    color: white;
+}
+
+.status-behind {
+    background-color: var(--warning-color);
+    color: var(--dark-color);
+}
+
+.status-way-behind {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+/* Modal styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    padding: 1rem;
+    border-bottom: 1px solid var(--neutral-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .app-container {
+        padding: 1rem;
+    }
+    
+    .task-update-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .task-update-form input {
+        width: 100%;
+    }
+} 
