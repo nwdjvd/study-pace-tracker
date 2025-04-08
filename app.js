@@ -9,6 +9,7 @@ const AppState = {
     startDate: null,
     dailyGoal: 1,
     history: [], // [{date: "YYYY-MM-DD", tasksCompleted: Number}]
+    darkMode: false, // Dark mode state
     
     // Initialize state from localStorage or with defaults
     init() {
@@ -23,6 +24,7 @@ const AppState = {
                 this.completedTasks = parsedState.completedTasks || 0;
                 this.dailyGoal = parsedState.dailyGoal || 1;
                 this.history = parsedState.history || [];
+                this.darkMode = parsedState.darkMode || false; // Load dark mode preference
                 
                 // Convert string dates back to Date objects
                 if (parsedState.deadline) {
@@ -41,6 +43,11 @@ const AppState = {
             this.reset();
         }
         
+        // Apply dark mode if enabled
+        if (this.darkMode) {
+            this.applyDarkMode();
+        }
+        
         // Render the UI with the loaded state
         this.render();
     },
@@ -54,7 +61,8 @@ const AppState = {
             deadline: this.deadline,
             startDate: this.startDate,
             dailyGoal: this.dailyGoal,
-            history: this.history
+            history: this.history,
+            darkMode: this.darkMode // Save dark mode preference
         }));
     },
     
@@ -67,7 +75,35 @@ const AppState = {
         this.startDate = null;
         this.dailyGoal = 1;
         this.history = [];
+        // Don't reset dark mode preference when resetting study data
         localStorage.removeItem('studyPaceTracker');
+    },
+    
+    // Toggle dark mode
+    toggleDarkMode() {
+        this.darkMode = !this.darkMode;
+        
+        if (this.darkMode) {
+            this.applyDarkMode();
+        } else {
+            this.removeDarkMode();
+        }
+        
+        this.save();
+    },
+    
+    // Apply dark mode
+    applyDarkMode() {
+        document.documentElement.classList.add('dark-mode');
+        document.body.classList.add('dark-mode');
+        document.getElementById('theme-toggle').checked = true;
+    },
+    
+    // Remove dark mode
+    removeDarkMode() {
+        document.documentElement.classList.remove('dark-mode');
+        document.body.classList.remove('dark-mode');
+        document.getElementById('theme-toggle').checked = false;
     },
     
     // Calculate days left until deadline
@@ -453,6 +489,12 @@ const AppState = {
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize app state
     AppState.init();
+    
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('change', () => {
+        AppState.toggleDarkMode();
+    });
     
     // Setup form submission
     const setupForm = document.getElementById('setup-form');

@@ -2,6 +2,15 @@
 
 All notable changes to the Study Pace Tracker project will be documented in this file.
 
+## [1.7.0] - 2023-04-08
+
+### Added
+- Dark mode feature with a toggle switch for improved eye comfort
+- Persistent dark mode preference saved with localStorage
+- Complete UI redesign with dark color scheme when dark mode is activated
+- Smooth transitions between light and dark themes
+- Theme toggle with sun/moon icons for intuitive switching
+
 ## [1.6.0] - 2023-04-08
 
 ### Changed
