@@ -16,7 +16,7 @@ A simple but smart study planner that helps you track your progress through task
 No installation needed! Just download the files and open `index.html` in your browser.
 
 ```
-git clone https://github.com/yourusername/study-pace-tracker.git
+git clone https://github.com/nwdjvd/study-pace-tracker.git
 cd study-pace-tracker
 ```
 
