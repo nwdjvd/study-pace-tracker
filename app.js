@@ -11,6 +11,13 @@ const AppState = {
     history: [], // [{date: "YYYY-MM-DD", tasksCompleted: Number}]
     darkMode: false, // Dark mode state
     
+    // Get today's tasks completed
+    getTodayTasksCompleted() {
+        const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+        const todayEntry = this.history.find(item => item.date === today);
+        return todayEntry ? todayEntry.tasksCompleted : 0;
+    },
+    
     // Initialize state from localStorage or with defaults
     init() {
         try {
@@ -254,7 +261,10 @@ const AppState = {
         // Check if we already have an entry for today
         const todayIndex = this.history.findIndex(item => item.date === today);
         
+        let todayTasksBeforeUpdate = 0;
         if (todayIndex >= 0) {
+            // Get current count for today before updating
+            todayTasksBeforeUpdate = this.history[todayIndex].tasksCompleted;
             // Update existing entry
             this.history[todayIndex].tasksCompleted += tasksCompleted;
         } else {
@@ -265,9 +275,21 @@ const AppState = {
             });
         }
         
+        // Calculate tasks after update for today
+        const todayTasksAfterUpdate = todayTasksBeforeUpdate + tasksCompleted;
+        
+        // Check if today's goal was just met
+        const wasGoalMet = todayTasksBeforeUpdate >= this.dailyGoal;
+        const isGoalNowMet = todayTasksAfterUpdate >= this.dailyGoal;
+        
         this.completedTasks += tasksCompleted;
         this.save();
         this.render();
+        
+        // Show a special message if the user just met their daily goal
+        if (!wasGoalMet && isGoalNowMet) {
+            alert(`🎉 Congratulations! You've met your daily goal of ${this.dailyGoal} tasks!`);
+        }
     },
     
     // Set up new study plan
@@ -386,6 +408,20 @@ const AppState = {
         document.getElementById('required-pace').textContent = this.getRequiredPace();
         document.getElementById('daily-goal-display').textContent = this.dailyGoal;
         
+        // Update today's goal
+        const todaysCompleted = this.getTodayTasksCompleted();
+        document.getElementById('today-goal').textContent = `${todaysCompleted}/${this.dailyGoal}`;
+        
+        // Add visual indicator if today's goal is met
+        const todayGoalElement = document.getElementById('today-goal-container');
+        if (todaysCompleted >= this.dailyGoal) {
+            todayGoalElement.classList.add('goal-met');
+            todayGoalElement.classList.remove('goal-not-met');
+        } else {
+            todayGoalElement.classList.add('goal-not-met');
+            todayGoalElement.classList.remove('goal-met');
+        }
+        
         // Update progress bar - show total progress while using daily goal info for status
         const totalProgressPercentage = (this.completedTasks / this.totalTasks) * 100;
         const progressBar = document.getElementById('progress-bar');
@@ -420,6 +456,12 @@ const AppState = {
         } else {
             tipElement.classList.add('hidden');
         }
+        
+        // Update tasks completed today input to reflect remaining tasks
+        const tasksCompletedTodayInput = document.getElementById('tasks-completed-today');
+        const tasksRemainingToday = Math.max(0, this.dailyGoal - todaysCompleted);
+        tasksCompletedTodayInput.value = tasksRemainingToday > 0 ? 1 : 0;
+        tasksCompletedTodayInput.max = this.totalTasks - this.completedTasks;
         
         // Update history list
         this.renderHistory();

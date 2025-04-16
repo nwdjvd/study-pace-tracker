@@ -2,6 +2,15 @@
 
 All notable changes to the Study Pace Tracker project will be documented in this file.
 
+## [1.8.0] - 2023-04-08
+
+### Added
+- Today's Goal tracker showing progress toward daily goal (x/y format)
+- Visual indicators with colors and icons to show if daily goal is met
+- Celebration alert when reaching daily goal
+- Smart pre-filling of task input field based on remaining tasks needed
+- Improved labeling on the task update form for better clarity
+
 ## [1.7.0] - 2023-04-08
 
 ### Added
